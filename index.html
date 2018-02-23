@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div v-if="visible">
+        <p>User count : {{ count() }}</p>
+        <ul>
+            <li v-for="item in users">
+                <span>{{ item.name }}</span>
+                <span>{{ item.surname}}</span>
+                <span>{{ showUrl(item.url) }}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello dude",
+            users: [
+                {
+                    name: "Peter",
+                    surname: "Dow",
+                    url: "/avatars/dow.png"
+                },
+                {
+                    name: "John",
+                    surname: "Harper",
+                    url: ""
+                },
+                {
+                    name: "Liz",
+                    surname: "Tiler",
+                    url: "/avatars/tiler.png"
+                }
+            ],
+            visible: true
+        },
+        methods: {
+            showUrl: function (url) {
+                return url === "" ? "no url" : url;
+            },
+            count: function () {
+                return this.users.length;
+            }
+        }
+    });
+</script>
+</html>
