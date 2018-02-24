@@ -7,10 +7,11 @@
 </head>
 <body>
 <div id="app">
+    <button type="button" v-on:click="buttonHandler">{{ buttonTitle }}</button>
     <div v-if="visible">
         <p>User count : {{ count() }}</p>
         <ul>
-            <li v-for="item in users">
+            <li v-for="item in users" :key="item">
                 <span>{{ item.name }}</span>
                 <span>{{ item.surname}}</span>
                 <span>{{ showUrl(item.url) }}</span>
@@ -22,25 +23,28 @@
 <script>
     var app = new Vue({
         el: "#app",
-        data: {
-            users: [
-                {
-                    name: "Peter",
-                    surname: "Dow",
-                    url: "/avatars/dow.png"
-                },
-                {
-                    name: "John",
-                    surname: "Harper",
-                    url: ""
-                },
-                {
-                    name: "Liz",
-                    surname: "Tiler",
-                    url: "/avatars/tiler.png"
-                }
-            ],
-            visible: true
+        data: function () {
+            return {
+                users: [
+                    {
+                        name: "Peter",
+                        surname: "Dow",
+                        url: "/avatars/dow.png"
+                    },
+                    {
+                        name: "John",
+                        surname: "Harper",
+                        url: ""
+                    },
+                    {
+                        name: "Liz",
+                        surname: "Tiler",
+                        url: "/avatars/tiler.png"
+                    }
+                ],
+                visible: true,       // initial state
+                buttonTitle: "Hide"  // initial state
+            };
         },
         methods: {
             showUrl: function (url) {
@@ -48,6 +52,15 @@
             },
             count: function () {
                 return this.users.length;
+            },
+            buttonHandler: function () {
+                if (this.visible) {
+                    this.visible = false;
+                    this.buttonTitle = "Show";
+                } else {
+                    this.visible = true;
+                    this.buttonTitle = "Hide";
+                }
             }
         }
     });
