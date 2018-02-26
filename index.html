@@ -1,68 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
     <meta charset="UTF-8">
-    <title>home-task-1</title>
+    <title>home-task</title>
 </head>
 <body>
-<div id="app">
-    <button type="button" v-on:click="buttonHandler">{{ buttonTitle }}</button>
-    <div v-if="visible">
-        <p>User count : {{ count() }}</p>
-        <ul>
-            <li v-for="item in users" :key="item">
-                <span>{{ item.name }}</span>
-                <span>{{ item.surname}}</span>
-                <span>{{ showUrl(item.url) }}</span>
-            </li>
-        </ul>
-    </div>
-</div>
+<div id="app"></div>
 </body>
 <script>
     var app = new Vue({
-        el: "#app",
-        data: function () {
-            return {
-                users: [
-                    {
-                        name: "Peter",
-                        surname: "Dow",
-                        url: "/avatars/dow.png"
-                    },
-                    {
-                        name: "John",
-                        surname: "Harper",
-                        url: ""
-                    },
-                    {
-                        name: "Liz",
-                        surname: "Tiler",
-                        url: "/avatars/tiler.png"
-                    }
-                ],
-                visible: true,       // initial state
-                buttonTitle: "Hide"  // initial state
-            };
-        },
-        methods: {
-            showUrl: function (url) {
-                return url === "" ? "no url" : url;
-            },
-            count: function () {
-                return this.users.length;
-            },
-            buttonHandler: function () {
-                if (this.visible) {
-                    this.visible = false;
-                    this.buttonTitle = "Show";
-                } else {
-                    this.visible = true;
-                    this.buttonTitle = "Hide";
-                }
-            }
-        }
+        el: "#app"
     });
 </script>
 </html>
