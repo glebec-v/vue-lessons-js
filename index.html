@@ -11,7 +11,7 @@
     <div v-if="visible">
         <p>User count : {{ count() }}</p>
         <ul>
-            <li v-for="item in users" :key="item">
+            <li v-for="item in users" :key="item.id">
                 <span>{{ item.name }}</span>
                 <span>{{ item.surname}}</span>
                 <span>{{ showUrl(item.url) }}</span>
@@ -27,19 +27,22 @@
             return {
                 users: [
                     {
-                        name: "Peter",
+                        id:      1,
+                        name:    "Peter",
                         surname: "Dow",
-                        url: "/avatars/dow.png"
+                        url:     "/avatars/dow.png"
                     },
                     {
-                        name: "John",
+                        id:      2,
+                        name:    "John",
                         surname: "Harper",
-                        url: ""
+                        url:     ""
                     },
                     {
-                        name: "Liz",
+                        id:      3,
+                        name:    "Liz",
                         surname: "Tiler",
-                        url: "/avatars/tiler.png"
+                        url:     "/avatars/tiler.png"
                     }
                 ],
                 visible: true,       // initial state
