@@ -50,12 +50,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="(user, index) in users" :key="user.id">
                       <th scope="row">{{ user.id }}</th>
                       <td>{{ user.name }}</td>
                       <td>{{ user.lastname }}</td>
                       <td>{{ user.url }}</td>
-                      <td><span class="badge" v-bind:class="{'badge-success': user.active, 'badge-default': !user.active}">{{ user.active ? 'Active' : 'Inactive' }}</span></td>
+                      <td><span v-bind:class="activeClass(index)">{{ activeText(index) }}</span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -65,6 +65,18 @@
             users: {
                 type: Array,
                 required: true
+            }
+        },
+        methods: {
+            activeClass: function (index) {
+                return {
+                    'badge':         true,
+                    'badge-success': this.users[index].active,
+                    'badge-default': !this.users[index].active
+                };
+            },
+            activeText: function (index) {
+                return this.users[index].active ? 'Active' : 'Inactive'
             }
         }
     };
