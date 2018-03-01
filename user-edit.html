@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="user-edit">
-
+    <user-edit-form v-bind:user="userFields"></user-edit-form>
 </div>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -37,8 +37,51 @@
 </script>
 </body>
 <script>
-    var userEdit = new Vue({
-        el: "#user-edit"
+    const userForm = {
+        template: `
+        <form>
+          <div class="form-group">
+            <label for="userName">Name</label>
+            <input type="text" class="form-control" id="userName" aria-describedby="userNameHelp" placeholder="Enter User Name" v-model="user.name">
+            <small id="userNameHelp" class="form-text text-muted">{{ user.name }}</small>
+          </div>
+          <div class="form-group">
+            <label for="userLastName">Last Name</label>
+            <input type="text" class="form-control" id="userLastName" aria-describedby="userLastNameHelp" placeholder="Enter User Last Name" v-model="user.lastName">
+            <small id="userLastNameHelp" class="form-text text-muted">{{ user.lastName }}</small>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" v-model="user.active">
+              is active
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="userUrl">Url</label>
+            <input type="text" class="form-control" id="userUrl" aria-describedby="userUrlHelp" placeholder="Enter User url" v-model="user.url">
+            <small id="userUrlHelp" class="form-text text-muted">{{ user.url }}</small>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        `,
+        props: {
+            // user form
+            user: {
+                type: Array,
+                required: true
+            }
+        }
+    };
+    const userEdit = new Vue({
+        el: "#user-edit",
+        components: {
+            'user-edit-form': userForm
+        },
+        data: function () {
+            return {
+                userFields: ['name', 'lastName', 'active', 'url']
+            }
+        }
     });
 </script>
 </html>
