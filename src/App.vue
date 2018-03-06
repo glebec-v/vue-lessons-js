@@ -1,17 +1,20 @@
 <template>
   <div>
-      <nav class="navbar navbar-toggleable-md navbar-light bg-light">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+      <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary">
           <router-link to="/" class="navbar-brand">
-              Vue.js course app
+              Vue.js lesson 3
           </router-link>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav mr-auto">
-                  <router-link tag="li" active-class="active" to="/" exact>
-                      <a class="nav-link">Home</a>
+          <div class="collapse navbar-collapse" id="navbar">
+              <ul class="nav navbar-nav">
+                  <router-link tag="li" active-class="active" to="/users" exact>
+                      <a class="nav-link">Users</a>
+                  </router-link>
+                  <router-link tag="li" active-class="active" to="/edit" exact>
+                      <a class="nav-link">Edit user</a>
+                  </router-link>
+                  <router-link tag="li" active-class="active" to="/add" exact>
+                      <a class="nav-link">Add user</a>
                   </router-link>
               </ul>
           </div>
