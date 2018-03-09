@@ -1,13 +1,41 @@
 <template>
     <div>
-        <h3>UserList</h3>
+        <h4>User list</h4>
+        <div v-if="userList">
+            <user-list-template v-bind:users="userList"></user-list-template>
+        </div>
+        <div v-else>
+            <p class="alert-info">Loading...</p>
+        </div>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'user-list'
-}
+    import userListTemplate from '@/components/List';
+    import Axios from '@/infrastructure/axiosConfig';
+    export default {
+        name: 'UsersPage',
+        components: {
+            'user-list-template': userListTemplate
+        },
+        data: function () {
+            return {
+                userList: []
+            };
+        },
+        methods: {
+            loadUsers: function () {
+                let self = this;
+                Axios.get('/users')
+                    .then(response => {
+                        self.userList = response.data;
+                    });
+            }
+        },
+        mounted: function () {
+            this.loadUsers();
+        }
+    };
 </script>
 
 <style scoped>
