@@ -13,6 +13,7 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Registered</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
             <td>{{ user.email }}</td>
             <td>{{ user.phone }}</td>
             <td>{{ user.registered }}</td>
+            <td><button type="button" class="btn btn-info" v-on:click="editRequest( user.id )">Edit</button></td>
         </tr>
         </tbody>
     </table>
@@ -45,7 +47,6 @@
         },
         methods: {
             activeClass: function (index) {
-                console.log(this.users[index]);
                 return {
                     'badge':         true,
                     'badge-success': this.users[index].isActive,
@@ -54,6 +55,9 @@
             },
             activeText: function (index) {
                 return this.users[index].isActive ? 'Active' : 'Inactive'
+            },
+            editRequest: function (id) {
+                this.$emit('edit', {userId: id});
             }
         }
     };

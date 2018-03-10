@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 0,
-      "isActive": true,
+      "isActive": false,
       "balance": "$1,663.85",
       "picture": "http://placehold.it/128x128",
       "age": 34,
@@ -175,6 +175,22 @@
       "address": "671 Junius Street, Bannock, California, 3682",
       "about": "Labore irure magna magna amet reprehenderit ea excepteur ipsum officia proident ut dolore proident non. Ea amet aliqua sint pariatur tempor Lorem exercitation exercitation enim adipisicing mollit. Ea magna commodo exercitation minim irure consectetur consectetur. Ad dolor ipsum commodo consectetur aliquip consectetur cupidatat dolore enim esse non nisi ullamco duis. Id in veniam dolor eiusmod veniam est cupidatat enim dolor deserunt laboris. Cillum do anim consequat consectetur eu officia nisi.",
       "registered": "28.12.2017"
+    },
+    {
+      "isActive": true,
+      "balance": "$10,000.00",
+      "picture": "http://placehold.it/128x128",
+      "age": 40,
+      "accessLevel": "admin",
+      "firstName": "Jack",
+      "lastName": "Shepard",
+      "company": "OCEANIC-815",
+      "email": "shepard@clinic.au",
+      "phone": "+815 (815) 815-8158",
+      "address": "ADDRESS",
+      "about": "The de facto leader of the crash survivors, in the show's first four seasons, Jack is very much a man of science. He serves as the antithesis of man of faith John Locke; however, his experiences in season five mold Jack into a believer, to the point of becoming John Locke's spiritual successor in the final season.",
+      "registered": "22.09.2004",
+      "id": 11
     }
   ]
 }

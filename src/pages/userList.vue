@@ -2,7 +2,7 @@
     <div>
         <h4>User list</h4>
         <div v-if="userList">
-            <user-list-template v-bind:users="userList"></user-list-template>
+            <user-list-template v-bind:users="userList" v-on:edit="editRequestHandler"></user-list-template>
         </div>
         <div v-else>
             <p class="alert-info">Loading...</p>
@@ -30,6 +30,9 @@
                     .then(response => {
                         self.userList = response.data;
                     });
+            },
+            editRequestHandler: function (eventData) {
+                this.$router.push({ path: `/users/${eventData.userId}`});
             }
         },
         mounted: function () {

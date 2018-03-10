@@ -10,9 +10,6 @@
                   <router-link tag="li" active-class="active" to="/users" exact>
                       <a class="nav-link">Users</a>
                   </router-link>
-                  <router-link tag="li" active-class="active" to="/edit" exact>
-                      <a class="nav-link">Edit user</a>
-                  </router-link>
                   <router-link tag="li" active-class="active" to="/add" exact>
                       <a class="nav-link">Add user</a>
                   </router-link>
