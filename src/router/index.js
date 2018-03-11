@@ -2,13 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import HelloWorld from '@/pages/HelloWorld'
-import Users from '@/pages/userList'
-import Edit from '@/pages/userEdit'
-import Add from '@/pages/userAdd'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
+    mode: 'history',
+    linkActiveClass: 'active',
     routes: [
         {
             path: '/',
@@ -17,15 +16,15 @@ export default new Router({
         },
         {
             path: '/users',
-            component: Users
+            component: () => import('@/pages/userList')
         },
         {
             path: '/users/:userId',
-            component: Edit
+            component: () => import('@/pages/userEdit')
         },
         {
             path: '/add',
-            component: Add
+            component: () => import('@/pages/userAdd')
         }
     ]
 })

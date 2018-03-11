@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <div>
         <div class="form-group">
             <label for="firstName">Name</label>
             <input type="text" class="form-control" id="firstName" v-model="user.firstName">
@@ -16,8 +16,7 @@
             <label for="company">Company</label>
             <input type="text" class="form-control" id="company" v-model="user.company">
         </div>
-        <button type="button" class="btn btn-primary" v-on:click="saveRequest">Save</button>
-    </form>
+    </div>
 </template>
 
 <script>
@@ -29,15 +28,6 @@
                 type: Object,
                 required: true
             }
-        },
-        methods: {
-            saveRequest: function () {
-                this.$emit('save', this.user);
-            }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

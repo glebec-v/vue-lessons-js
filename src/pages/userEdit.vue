@@ -2,47 +2,47 @@
     <div>
         <h3>User Edit Form</h3>
         <div>
-            <user-edit-form v-bind:user="userFields" v-on:save="updateUser"></user-edit-form>
+            <user-form v-bind:user="userFields"></user-form>
+            <button type="button" class="btn btn-primary" v-on:click="updateUser">Save</button>
         </div>
     </div>
 </template>
 
 <script>
-    import userForm from '@/components/Edit';
+    import userForm from '@/components/UserForm';
     import Axios from '@/infrastructure/axiosConfig';
     export default {
         name: 'user-edit',
         components: {
-            'user-edit-form': userForm
+            'user-form': userForm
         },
         data: function () {
             return {
                 userFields: {}
             }
         },
+        mounted: function () {
+            this.loadUser();
+        },
         methods: {
-            loadUser: function (id) {
-                const self = this;
-                Axios.get(`/users/${id}`)
+            loadUser: function () {
+                if (! this.userId) {
+                    return;
+                }
+                Axios.get(`/users/${this.userId}`)
                     .then(response => {
-                        self.userFields = response.data;
+                        this.userFields = response.data;
                     });
             },
-            updateUser: function (user) {
-                const self = this;
-                Axios.patch(`/users/${user.id}`, user)
-                    .then(() => self.$router.replace({ path: `/users`}));
+            updateUser: function () {
+                Axios.patch(`/users/${this.userFields.id}`, this.userFields)
+                    .then(() => this.$router.replace({ path: `/users`}));
             }
         },
-        mounted: function () {
-            if (this.$router.currentRoute.params.hasOwnProperty('userId')) {
-                this.loadUser(this.$router.currentRoute.params.userId);
+        computed: {
+            userId: function () {
+                return this.$route.params.userId || '';
             }
-
         }
     }
 </script>
-
-<style scoped>
-
-</style>

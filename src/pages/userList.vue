@@ -1,22 +1,25 @@
 <template>
     <div>
-        <h4>User list</h4>
-        <div v-if="userList">
-            <user-list-template v-bind:users="userList" v-on:edit="editRequestHandler"></user-list-template>
+        <h4 class="align-content-start">User list</h4>
+        <div v-if="!userList">
+            <p class="alert-info">Loading...</p>
         </div>
         <div v-else>
-            <p class="alert-info">Loading...</p>
+            <list-controls class="align-middle"></list-controls>
+            <user-list v-bind:users="userList" v-on:edit="editRequestHandler"></user-list>
         </div>
     </div>
 </template>
 
 <script>
-    import userListTemplate from '@/components/List';
+    import userList from '@/components/List';
     import Axios from '@/infrastructure/axiosConfig';
+    import ListControls from "@/components/ListControls";
     export default {
         name: 'UsersPage',
         components: {
-            'user-list-template': userListTemplate
+            'user-list': userList,
+            'list-controls': ListControls,
         },
         data: function () {
             return {
@@ -40,7 +43,3 @@
         }
     };
 </script>
-
-<style scoped>
-
-</style>

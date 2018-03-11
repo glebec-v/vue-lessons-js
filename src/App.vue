@@ -7,10 +7,10 @@
 
           <div class="collapse navbar-collapse" id="navbar">
               <ul class="nav navbar-nav">
-                  <router-link tag="li" active-class="active" to="/users" exact>
+                  <router-link tag="li" to="/users" exact>
                       <a class="nav-link">Users</a>
                   </router-link>
-                  <router-link tag="li" active-class="active" to="/add" exact>
+                  <router-link tag="li" to="/add" exact>
                       <a class="nav-link">Add user</a>
                   </router-link>
               </ul>
