@@ -1,30 +1,40 @@
 <template>
-    <div>
-        <paginator-settings v-on:usersonpage="settingsHandler"></paginator-settings>
-        <span class="alert-info">{{ paginator.lines }}</span>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-3">
+                <paginator-lines v-model.number="linesPerPage"></paginator-lines>
+                <span class="alert-info">Lines: {{ linesPerPage }}</span>
+            </div>
+            <div class="col-3">
+                <paginator-page v-bind:total="pagesTotal" v-model="pageNumber"></paginator-page>
+                <span class="alert-info">Page: {{ pageNumber }}</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    const paginator = {}; // todo import
-    import paginatorSettings from '@/components/PaginatorSettings'
     export default {
         name: "list-controls",
         components: {
-            'paginator-controls': paginator,
-            'paginator-settings': paginatorSettings
+            'paginator-page': () => import('@/components/PaginatorPage'),
+            'paginator-lines': () => import('@/components/PaginatorLinesOnPage')
+        },
+        props: {
+            rows: {
+                type: Number,
+                required: true
+            }
         },
         data() {
             return {
-                paginator: {
-                    lines: 0,
-                    page: 0
-                }
+                linesPerPage: 0,
+                pageNumber: 0,
             }
         },
-        methods: {
-            settingsHandler: function (eventData) {
-                this.paginator.lines = eventData.lines;
+        computed: {
+            pagesTotal: function () {
+                return this.linesPerPage === 0 ? 1 : Math.ceil(this.rows/this.linesPerPage);
             }
         }
     }

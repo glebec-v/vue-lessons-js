@@ -1,11 +1,19 @@
 <template>
     <div>
-        <h4 class="align-content-start">User list</h4>
-        <div v-if="!userList">
-            <p class="alert-info">Loading...</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h4>User list (users {{ userList.length }})</h4>
+                </div>
+                <div class="col-9" v-if="!userList">
+                    <p class="alert-info">Loading...</p>
+                </div>
+                <div class="col-9" v-else>
+                    <list-controls v-bind:rows="userList.length"></list-controls>
+                </div>
+            </div>
         </div>
-        <div v-else>
-            <list-controls class="align-middle"></list-controls>
+        <div>
             <user-list v-bind:users="userList" v-on:edit="editRequestHandler"></user-list>
         </div>
     </div>
