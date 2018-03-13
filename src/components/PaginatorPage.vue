@@ -2,14 +2,13 @@
     <div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#" v-on:click="previousHandler">Previous</a></li>
                 <li class="page-item" v-for="page in total">
                     <a class="page-link" href="#" v-on:click="selectHandler( page )">{{ page }}</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" href="#" v-on:click="nextHandler">Next</a></li>
             </ul>
         </nav>
-        <div>total{{ total }}</div>
     </div>
 </template>
 
@@ -28,7 +27,26 @@
             };
         },
         methods: {
+            previousHandler: function () {
+                let page = 0;
+                if (1 === this.pageSelected) {
+                    page = 1;
+                } else {
+                    page = this.pageSelected - 1;
+                }
+                this.selectHandler(page);
+            },
+            nextHandler: function () {
+                let page = 0;
+                if (this.total === this.pageSelected) {
+                    page = this.total;
+                } else {
+                    page = this.pageSelected + 1;
+                }
+                this.selectHandler(page);
+            },
             selectHandler: function (page) {
+                this.pageSelected = parseInt(page);
                 this.$emit('input', page);
             }
         },
