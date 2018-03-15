@@ -3,13 +3,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-3">
-                    <h4>User list (users {{ userList.length }})</h4>
+                    <h4>User list (users {{ totalUsersCount }})</h4>
                 </div>
                 <div class="col-9" v-if="!userList">
                     <p class="alert-info">Loading...</p>
                 </div>
                 <div class="col-9" v-else>
-                    <list-controls v-bind:rows="userList.length"></list-controls>
+                    <list-controls v-bind:rows="totalUsersCount" v-on:pagination="paginationHandler"></list-controls>
                 </div>
             </div>
         </div>
@@ -31,23 +31,35 @@
         },
         data: function () {
             return {
-                userList: []
+                userList: [],
+                url: '/users',
+                totalUsersCount: 0
             };
         },
         methods: {
             loadUsers: function () {
-                let self = this;
-                Axios.get('/users')
-                    .then(response => {
-                        self.userList = response.data;
-                    });
+                return Axios.get(this.url)
+                    .then(response => { this.userList = response.data; });
             },
-            editRequestHandler: function (eventData) {
-                this.$router.push({ path: `/users/${eventData.userId}`});
+            editRequestHandler: function (editUser) {
+                this.$router.push({ path: `/users/${editUser.userId}`});
+            },
+            paginationHandler: function (pagination) {
+                // todo save pagination state somewhere after user editing or deleting to return to previous pagination settings
+                if (0 === parseInt(pagination.linesPerPage)) {
+                    // no pagination
+                    this.url = '/users';
+                    this.loadUsers();
+                } else {
+                    // pagination set
+                    this.url = `/users?_page=${pagination.pageNumber}&_limit=${pagination.linesPerPage}`;
+                    this.loadUsers();
+                }
             }
         },
         mounted: function () {
-            this.loadUsers();
+            // save total user count
+            this.loadUsers().then(() => { this.totalUsersCount = this.userList.length; });
         }
     };
 </script>

@@ -34,7 +34,7 @@
     },
     {
       "id": 2,
-      "isActive": false,
+      "isActive": true,
       "balance": "$1,549.85",
       "picture": "http://placehold.it/128x128",
       "age": 20,
@@ -177,7 +177,7 @@
       "registered": "28.12.2017"
     },
     {
-      "isActive": false,
+      "isActive": true,
       "balance": "$10,000.00",
       "picture": "http://placehold.it/128x128",
       "age": 40,

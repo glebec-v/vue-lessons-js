@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav aria-label="Page navigation example">
+        <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#" v-on:click="previousHandler">Previous</a></li>
                 <li class="page-item" v-for="page in total">
