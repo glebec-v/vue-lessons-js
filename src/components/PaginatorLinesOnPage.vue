@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <select class="form-control" v-on:input="inputHandler($event.target.value)">
-            <option v-for="option in options" v-bind:value="option.value">
+            <option v-for="option in options" :key="option.value" v-bind:value="option.value">
                 {{ option.text }}
             </option>
         </select>
@@ -11,10 +11,15 @@
 <script>
     export default {
         name: 'paginator-settings',
+        props: {
+            lineOptions: {
+                type: Array
+            }
+        },
         data() {
             return {
-                options: [
-                    { text: 'Select rows per page', value: '0' },
+                defaultOptions: [
+                    { text: 'Select rows per page', value: '' },
                     { text: '3 lines on page', value: '3' },
                     { text: '5 lines on page', value: '5' },
                     { text: '15 lines on page', value: '15' },
@@ -23,14 +28,20 @@
                 ]
             }
         },
+        computed: {
+            options: function () {
+                if (undefined === this.lineOptions) {
+                    return this.defaultOptions;
+                }
+                return this.lineOptions;
+            }
+        },
         methods: {
             inputHandler: function (value) {
-                this.$emit('input', value);
+                if (value.length) {
+                    this.$emit('input', value);
+                }
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

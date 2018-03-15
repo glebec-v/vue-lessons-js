@@ -1,24 +1,23 @@
 <template>
-    <div>
+    <div class="container">
         <h3>User Edit Form</h3>
         <div>
-            <user-form v-bind:user="userFields"></user-form>
+            <user-form v-bind:user="user" v-model="user"></user-form>
             <button type="button" class="btn btn-primary" v-on:click="updateUser">Save</button>
         </div>
     </div>
 </template>
 
 <script>
-    import userForm from '@/components/UserForm';
     import Axios from '@/infrastructure/axiosConfig';
     export default {
         name: 'user-edit',
         components: {
-            'user-form': userForm
+            'user-form': () => import('@/components/UserForm')
         },
         data: function () {
             return {
-                userFields: {}
+                user: {}
             }
         },
         mounted: function () {
@@ -31,11 +30,11 @@
                 }
                 Axios.get(`/users/${this.userId}`)
                     .then(response => {
-                        this.userFields = response.data;
+                        this.user = response.data;
                     });
             },
             updateUser: function () {
-                Axios.patch(`/users/${this.userFields.id}`, this.userFields)
+                Axios.patch(`/users/${this.user.id}`, this.user)
                     .then(() => this.$router.replace({ path: `/users`}));
             }
         },

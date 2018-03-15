@@ -8,6 +8,7 @@
 
 <script>
     // todo ADD user-form to <template>
+    // TODO NOT COMPLETED!!!!
     import Axios from '@/infrastructure/axiosConfig';
     export default {
         name: 'user-add',
@@ -33,14 +34,9 @@
         },
         methods: {
             add: function () {
-                const self = this;
                 Axios.post('/users', self.user)
-                    .then(() => self.done = true);
+                    .then(() => this.done = true);
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

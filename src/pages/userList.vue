@@ -7,6 +7,8 @@
                 </div>
                 <div class="col-9">
                     <list-controls v-bind:rows="totalUsersCount" v-on:pagination="paginationHandler"></list-controls>
+                    <!-- or with array of choices-->
+                    <!---list-controls v-bind:rows="totalUsersCount" v-bind:choices="viewArray" v-on:pagination="paginationHandler"></list-controls--->
                 </div>
             </div>
         </div>
@@ -33,8 +35,18 @@
             return {
                 userList: [],
                 url: '/users',
-                totalUsersCount: 0
+                totalUsersCount: 0,
+                viewArray: [
+                    {text: 'select', value: '' },
+                    {text: '3', value: '3' },
+                    {text: '4', value: '4' },
+                    {text: '6', value: '6' },
+                ]
             };
+        },
+        mounted: function () {
+            // save total user count
+            this.loadUsers().then(() => { this.totalUsersCount = this.userList.length; });
         },
         methods: {
             loadUsers: function () {
@@ -42,8 +54,8 @@
                     .then(response => { this.userList = response.data; });
                 // todo error handling!
             },
-            editRequestHandler: function (editUser) {
-                this.$router.push({ path: `/users/${editUser.userId}`});
+            editRequestHandler: function (userId) {
+                this.$router.push({ path: `/users/${userId}`});
             },
             paginationHandler: function (pagination) {
                 // todo save pagination state somewhere after user editing or deleting to return to previous pagination settings
@@ -57,10 +69,6 @@
                     this.loadUsers();
                 }
             }
-        },
-        mounted: function () {
-            // save total user count
-            this.loadUsers().then(() => { this.totalUsersCount = this.userList.length; });
         }
     };
 </script>

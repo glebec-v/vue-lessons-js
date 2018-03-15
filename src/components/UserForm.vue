@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="form-group">
             <label for="firstName">Name</label>
             <input type="text" class="form-control" id="firstName" v-model="user.firstName">
@@ -21,7 +21,7 @@
 
 <script>
     export default {
-        name: "edit",
+        name: "edit-user",
         props: {
             // user form
             user: {

@@ -49,13 +49,6 @@
                 this.pageSelected = parseInt(page);
                 this.$emit('input', page);
             }
-        },
-        mounted: function () {
-            this.selectHandler(this.pageSelected);
         }
     }
 </script>
-
-<style scoped>
-
-</style>

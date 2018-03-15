@@ -17,9 +17,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(user, index) in users" :key="user.id">
+        <tr v-for="user in users" :key="user.id">
             <th scope="row">{{ user.id }}</th>
-            <td><span v-bind:class="activeClass(index)">{{ activeText(index) }}</span></td>
+            <td><span v-bind:class="activeClass(user.isActive)">{{ activeText(user.isActive) }}</span></td>
             <td>{{ user.balance }}</td>
             <td>{{ user.age }}</td>
             <td>{{ user.accessLevel }}</td>
@@ -29,7 +29,7 @@
             <td>{{ user.email }}</td>
             <td>{{ user.phone }}</td>
             <td>{{ user.registered }}</td>
-            <td><button type="button" class="btn btn-info" v-on:click="editRequest( user.id )">Edit</button></td>
+            <td><button type="button" class="btn btn-info" v-on:click="$emit('edit', user.id)">Edit</button></td>
         </tr>
         </tbody>
     </table>
@@ -46,23 +46,16 @@
             }
         },
         methods: {
-            activeClass: function (index) {
+            activeClass: function (active) {
                 return {
                     'badge':         true,
-                    'badge-success': this.users[index].isActive,
-                    'badge-warning': !this.users[index].isActive
+                    'badge-success': active,
+                    'badge-warning': !active
                 };
             },
-            activeText: function (index) {
-                return this.users[index].isActive ? 'Active' : 'Inactive'
-            },
-            editRequest: function (id) {
-                this.$emit('edit', {userId: id});
+            activeText: function (active) {
+                return active ? 'Active' : 'Inactive';
             }
         }
     };
 </script>
-
-<style scoped>
-
-</style>
