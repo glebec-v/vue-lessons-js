@@ -5,15 +5,15 @@
                 <div class="col-3">
                     <h4>User list (users {{ totalUsersCount }})</h4>
                 </div>
-                <div class="col-9" v-if="!userList">
-                    <p class="alert-info">Loading...</p>
-                </div>
-                <div class="col-9" v-else>
+                <div class="col-9">
                     <list-controls v-bind:rows="totalUsersCount" v-on:pagination="paginationHandler"></list-controls>
                 </div>
             </div>
         </div>
-        <div>
+        <div v-if="!userList">
+            <p class="alert-info">Loading...</p>
+        </div>
+        <div v-else>
             <user-list v-bind:users="userList" v-on:edit="editRequestHandler"></user-list>
         </div>
     </div>
@@ -40,6 +40,7 @@
             loadUsers: function () {
                 return Axios.get(this.url)
                     .then(response => { this.userList = response.data; });
+                // todo error handling!
             },
             editRequestHandler: function (editUser) {
                 this.$router.push({ path: `/users/${editUser.userId}`});
