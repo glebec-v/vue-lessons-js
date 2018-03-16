@@ -6,9 +6,9 @@
                     <h4>User list (users {{ totalUsersCount }})</h4>
                 </div>
                 <div class="col-9">
-                    <list-controls v-bind:rows="totalUsersCount" v-on:pagination="paginationHandler"></list-controls>
+                    <list-controls v-bind:rows="totalUsersCount" v-model="paginator"></list-controls>
                     <!-- or with array of choices-->
-                    <!---list-controls v-bind:rows="totalUsersCount" v-bind:choices="viewArray" v-on:pagination="paginationHandler"></list-controls--->
+                    <!---list-controls v-bind:rows="totalUsersCount" v-bind:choices="viewArray" v-model="paginator"></list-controls--->
                 </div>
             </div>
         </div>
@@ -41,33 +41,33 @@
                     {text: '3', value: '3' },
                     {text: '4', value: '4' },
                     {text: '6', value: '6' },
-                ]
+                ],
+                paginator: {}
             };
         },
         mounted: function () {
             // save total user count
             this.loadUsers().then(() => { this.totalUsersCount = this.userList.length; });
         },
+        computed: {
+            params: function () {
+                return {
+                    _page: this.paginator.pageNumber,
+                    _limit: this.paginator.linesPerPage
+                };
+            }
+        },
+        watch: {
+            paginator: 'loadUsers'
+        },
         methods: {
             loadUsers: function () {
-                return Axios.get(this.url)
+                return Axios.get(this.url, { params: this.params })
                     .then(response => { this.userList = response.data; });
                 // todo error handling!
             },
             editRequestHandler: function (userId) {
-                this.$router.push({ path: `/users/${userId}`});
-            },
-            paginationHandler: function (pagination) {
-                // todo save pagination state somewhere after user editing or deleting to return to previous pagination settings
-                if (0 === parseInt(pagination.linesPerPage)) {
-                    // no pagination
-                    this.url = '/users';
-                    this.loadUsers();
-                } else {
-                    // pagination set
-                    this.url = `/users?_page=${pagination.pageNumber}&_limit=${pagination.linesPerPage}`;
-                    this.loadUsers();
-                }
+                this.$router.push({ path: `${this.url}/${userId}`});
             }
         }
     };

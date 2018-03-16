@@ -5,7 +5,7 @@
                 <paginator-lines v-bind:lineOptions="choices" v-model.number="linesPerPage"></paginator-lines>
             </div>
             <div class="col-3">
-                <paginator-page v-bind:total="pagesTotal" v-model="pageNumber"></paginator-page>
+                <paginator-page v-bind:total="pagesTotal" v-model.number="pageNumber"></paginator-page>
             </div>
         </div>
     </div>
@@ -25,12 +25,13 @@
                 required: true
             },
             choices: {
-                type: Array
+                type: Array,
+                default: () => []
             }
         },
         data() {
             return {
-                linesPerPage: 100,
+                linesPerPage: 1000,
                 pageNumber: 1
             }
         },
@@ -49,10 +50,10 @@
         },
         methods: {
             emitPaginationEvent: function () {
-                this.$emit('pagination', {
+                this.$emit('input', {
                     linesPerPage: this.linesPerPage,
                     pageNumber: this.selectedPageNumber
-                });
+                })
             }
         }
     }

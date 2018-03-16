@@ -13,7 +13,8 @@
         name: 'paginator-settings',
         props: {
             lineOptions: {
-                type: Array
+                type: Array,
+                default: () => []
             }
         },
         data() {
@@ -30,10 +31,7 @@
         },
         computed: {
             options: function () {
-                if (undefined === this.lineOptions) {
-                    return this.defaultOptions;
-                }
-                return this.lineOptions;
+                return this.lineOptions.length ? this.lineOptions : this.defaultOptions;
             }
         },
         methods: {
