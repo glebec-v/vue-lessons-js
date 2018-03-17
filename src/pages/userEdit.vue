@@ -1,9 +1,13 @@
 <template>
     <div class="container">
         <h3>User Edit Form</h3>
-        <div>
+        <div class="row">
             <user-form v-bind:user="user" v-model="user"></user-form>
-            <button type="button" class="btn btn-primary" v-on:click="updateUser">Save</button>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button type="button" class="btn btn-lg btn-success" v-on:click="updateUser">Save</button>
+            </div>
         </div>
     </div>
 </template>

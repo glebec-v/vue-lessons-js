@@ -2,9 +2,8 @@
   <div>
       <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary">
           <router-link to="/" class="navbar-brand">
-              Vue.js lesson 3
+              Vue.js lesson 4
           </router-link>
-
           <div class="collapse navbar-collapse" id="navbar">
               <ul class="nav navbar-nav">
                   <router-link tag="li" to="/users" exact>
@@ -16,10 +15,9 @@
               </ul>
           </div>
       </nav>
-
       <div id="app">
-      <router-view/>
-    </div>
+        <router-view/>
+      </div>
   </div>
 </template>
 
