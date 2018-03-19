@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="registered">Registered</label>
-                    <input type="text" class="form-control" id="registered" v-model="user.registered">
+                    <date-picker id="registered" v-bind:date="user.registered" v-model="user.registered"></date-picker>
                 </div>
                 <div class="row">
                     <div class="col-3">
@@ -72,6 +72,9 @@
 <script>
     export default {
         name: "edit-user",
+        components: {
+            'date-picker': () => import('@/components/DatePicker')
+        },
         props: {
             // user form
             user: {

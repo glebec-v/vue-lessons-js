@@ -27,6 +27,11 @@
         mounted: function () {
             this.loadUser();
         },
+        computed: {
+            userId: function () {
+                return this.$route.params.userId || '';
+            }
+        },
         methods: {
             loadUser: function () {
                 if (! this.userId) {
@@ -40,11 +45,6 @@
             updateUser: function () {
                 Axios.patch(`/users/${this.user.id}`, this.user)
                     .then(() => this.$router.replace({ path: `/users`}));
-            }
-        },
-        computed: {
-            userId: function () {
-                return this.$route.params.userId || '';
             }
         }
     }
