@@ -16,7 +16,10 @@
             <p class="alert-info">Loading...</p>
         </div>
         <div v-else>
-            <user-list v-bind:users="userList" v-on:edit="editRequestHandler"></user-list>
+            <user-list v-bind:users="userList" v-on:edit="editRequestHandler">
+                <div slot="tableheader"></div>
+                <template slot="tablerowbody"></template>
+            </user-list>
         </div>
     </div>
 </template>
@@ -31,7 +34,7 @@
             'user-list': userList,
             'list-controls': ListControls,
         },
-        data: function () {
+        data() {
             return {
                 userList: [],
                 url: '/users',

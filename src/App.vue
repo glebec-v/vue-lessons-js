@@ -9,6 +9,9 @@
                   <router-link tag="li" to="/users" exact>
                       <a class="nav-link">Users</a>
                   </router-link>
+                  <router-link tag="li" to="/users-phones" exact>
+                      <a class="nav-link">Phone book</a>
+                  </router-link>
                   <router-link tag="li" to="/add" exact>
                       <a class="nav-link">Add user</a>
                   </router-link>

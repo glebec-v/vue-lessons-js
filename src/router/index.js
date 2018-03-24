@@ -25,6 +25,10 @@ export default new Router({
         {
             path: '/add',
             component: () => import('@/pages/userAdd')
+        },
+        {
+            path: '/users-phones',
+            component: () => import('@/pages/userPhoneBook')
         }
     ]
 })
