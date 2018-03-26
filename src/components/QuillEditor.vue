@@ -4,7 +4,7 @@
                 ref="quill"
                 class="form-control"
                 v-bind:rows="editorRows"
-                v-bind:value="textContent"
+                v-bind:value="value"
                 v-on:change="textChanged($event.target.value)"
         >
         </textarea>
@@ -19,9 +19,9 @@
     export default {
         name: "quill-editor",
         props: {
-            textContent: {
+            value: {
                 type: String,
-                default: ''
+                required: true
             },
             editorRows: {
                 type: Number,
@@ -35,6 +35,9 @@
         },
         mounted() {
             this.editorInit();
+        },
+        beforeDestroy: function () {
+            this.quill = null;
         },
         methods: {
             editorInit: function () {

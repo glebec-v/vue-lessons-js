@@ -1,6 +1,6 @@
 <template>
     <div class="component-datepicker">
-        <input type="text" ref="datepicker" class="form-control" v-bind:value="date">
+        <input type="text" ref="datepicker" class="form-control" v-bind:value="value">
     </div>
 </template>
 
@@ -10,9 +10,9 @@
     export default {
         name: "date-picker",
         props: {
-            date: {
+            value: {
                 type: String,
-                default: ''// todo format Date: (new Date()).now().toDateString()
+                default: ''
             }
         },
         data() {
@@ -27,18 +27,19 @@
             this.flatpickr.destroy();
         },
         watch: {
-            value: function() {
-                this.flatpickr.setDate(this.value, false, 'd.m.Y');
-            }
+            value: 'setDatePicker'
         },
         methods: {
             initDatePicker: function () {
                 this.flatpickr = flatpickr(this.$refs.datepicker, {
                     dateFormat: 'd.m.Y',
-                    onChange: (selectedDates, dateStr) => {
-                        this.$emit('input', dateStr);
-                    }
+                    onChange: (selectedDates, dateStr) => this.$emit('input', dateStr)
                 });
+            },
+            setDatePicker: function () {
+                if (this.flatpickr) {
+                    this.flatpickr.setDate(this.value, false, 'd.m.Y');
+                }
             }
         }
     }

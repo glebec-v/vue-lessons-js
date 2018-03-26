@@ -54,7 +54,7 @@
                 </div>
                 <div class="form-group">
                     <label for="registered">Registered</label>
-                    <date-picker id="registered" v-bind:date="user.registered" v-model="user.registered"></date-picker>
+                    <date-picker id="registered" v-model="user.registered"></date-picker>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
             <div class="col-12">
                 <div class="form-group">
                     <label for="about">About</label>
-                    <quill-editor id="about" v-bind:rows="15" v-bind:textContent="user.about" v-model="user.about"></quill-editor>
+                    <quill-editor id="about" v-bind:rows="15" v-model="user.about"></quill-editor>
                 </div>
             </div>
         </div>
