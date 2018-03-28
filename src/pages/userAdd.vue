@@ -1,17 +1,21 @@
 <template>
     <div>
         <h3>Add user</h3>
+        <div class="row">
+            <user-form v-model="user"></user-form>
+        </div>
         <button type="button" class="btn btn-danger" v-on:click="add">Add</button>
         <p class="alert-success" v-if="done">Saved</p>
     </div>
 </template>
 
 <script>
-    // todo ADD user-form to <template>
-    // TODO NOT COMPLETED!!!!
     import Axios from '@/infrastructure/axiosConfig';
     export default {
         name: 'user-add',
+        components: {
+            'user-form': () => import('@/components/UserForm')
+        },
         data: function () {
             return {
                 user: {
@@ -26,7 +30,7 @@
                     "email": "",
                     "phone": "",
                     "address": "",
-                    "about": "",
+                    "about": "about",
                     "registered": ""
                 },
                 done: false
@@ -34,8 +38,9 @@
         },
         methods: {
             add: function () {
-                Axios.post('/users', self.user)
-                    .then(() => this.done = true);
+                Axios.post('/users', this.user)
+                    .then(() => this.done = true)
+                    .then(() => this.$router.replace({ path: `/users`}));
             }
         }
     }

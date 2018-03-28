@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h3>User Edit Form</h3>
-        <div class="row">
-            <user-form v-bind:user="user" v-model="user"></user-form>
+        <div class="row" v-if="user">
+            <user-form v-model="user"></user-form>
         </div>
         <div class="row">
             <div class="col-3">
